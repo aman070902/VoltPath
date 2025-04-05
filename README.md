@@ -1,7 +1,6 @@
 # VoltPath - EV Route Navigation
 
-![VoltPath](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-04-04%20at%2011.32.17%E2%80%AFPM-smk5IO1ZopVHFpvQ43TSF1dTUOs5Bc.png)
-
+![VoltPath Landing Page](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-04-05%20at%202.24.42%E2%80%AFAM-u5kFpnwwISjBWdwzFtWv2qQXxFvIXy.png)
 VoltPath is a modern web application for EV route navigation, providing AI-powered route planning with real-time charging station data, traffic conditions, and weather updates.
 
 ## Quick Start Commands
