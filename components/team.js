@@ -14,19 +14,22 @@ export default function Team() {
     {
       name: "Eddy",
       role: "Frontend Developer",
-      image: "/placeholder.svg?height=300&width=300",
+      // Using Octocat Mona as the main image
+      image: "https://octodex.github.com/images/original.png",
       bio: "Specializes in React and modern frontend technologies.",
     },
     {
       name: "Aman",
       role: "Backend Developer",
-      image: "/placeholder.svg?height=300&width=300",
+      // Using Octocat Hubot as the main image
+      image: "https://octodex.github.com/images/hubot.jpg",
       bio: "Python expert with experience in FastAPI and data processing.",
     },
     {
       name: "Ashu",
       role: "ML Engineer",
-      image: "/placeholder.svg?height=300&width=300",
+      // Using Octocat Spidertocat as the main image
+      image: "https://octodex.github.com/images/spidertocat.png",
       bio: "Focuses on machine learning models and route optimization algorithms.",
     },
   ]
@@ -85,11 +88,11 @@ export default function Team() {
               className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all hover:translate-y-[-5px]"
               variants={itemVariants}
             >
-              <div className="aspect-square overflow-hidden">
+              <div className="aspect-square overflow-hidden relative">
                 <img
                   src={member.image || "/placeholder.svg"}
-                  alt={member.name}
-                  className="w-full h-full object-cover transition-transform hover:scale-105"
+                  alt={`${member.name} - ${member.role}`}
+                  className="w-full h-full object-contain bg-gray-50 p-4"
                 />
               </div>
               <div className="p-6">
