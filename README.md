@@ -15,3 +15,50 @@ npm install
 
 # Run development server
 npm run dev
+
+
+# Google Sheets API Setup Guide
+
+Follow the steps below to enable the Google Sheets API and create a service account for accessing Google Sheets data programmatically.
+
+## Step-by-Step Instructions
+
+### 1. Go to Google Cloud Console
+Visit the [Google Cloud Console](https://console.cloud.google.com/) and create a google cloud account.
+
+### 2. Create a New Project
+1. In the Google Cloud Console, click on the **project dropdown** (top-left of the console).
+2. Select **New Project**.
+3. Give your project a name.
+4. Click **Create** to create the new project.
+
+### 3. Select Your Project
+After creating your new project, ensure it's selected in the project dropdown at the top of the page.
+
+### 4. Enable the Google Sheets API
+1. In the left sidebar, navigate to **APIs & Services**.
+2. Click **+ ENABLE APIS AND SERVICES** at the top of the page.
+3. In the API Library, search for **Google Sheets API**.
+4. Select the **Google Sheets API** from the search results and click **Enable**.
+
+### 5. Create a Service Account
+1. Go to the **Credentials** page from the left sidebar under **APIs & Services**.
+2. Click **Create Credentials** and select **Service Account**.
+3. Enter a name for the service account (e.g., `google-sheets-service-account`).
+4. Click **Create**.
+
+### 6. Assign Role to Service Account
+1. In the **Grant this service account access to project** step, select the **Project > Owner** role to provide full access.
+2. Click **Continue**.
+
+### 7. Generate the Service Account Key
+1. After creating the service account, you’ll see it listed on the **Service Accounts** page.
+2. Click on your newly created service account.
+3. Go to the **Keys** tab.
+4. Click **Add Key** and select **Create New Key**.
+5. Choose **JSON** format for the key and click **Create**.
+6. The key file will automatically download to your computer. **Keep this file safe**, as it contains credentials that allow access to your Google Sheets data.
+
+### 8. Use the JSON Key in Your Code
+Use the downloaded JSON key in your application to authenticate and access the Google Sheets API. The key will typically be used in your code like so:
+
