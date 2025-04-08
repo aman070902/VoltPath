@@ -15,33 +15,73 @@ npm install
 
 # Run development server
 npm run dev
+```
 
+# Fetching Data From OpenChargeMap API and Pushing to Google Sheets Guideline
 
+## Step-by-Step Instructions
 
-## ML Model Procedure
+### 1. Go to Google Cloud Console
+Visit the [Google Cloud Console](https://console.cloud.google.com/) and creata a Google Cloud account.
 
-# Step 1: Data Collection
+### 2. Create a New Project
+1. In the Google Cloud Console, click on the **project dropdown** (top-left of the console).
+2. Select **New Project**.
+3. Give your project a name.
+4. Click **Create** to create the new project.
 
-- **Fetch Data:** Implement Python scripts using the `requests` library to periodically fetch real-time data from APIs for weather conditions, traffic information, and electric vehicle (EV) charging station availability. Each API will require a unique API key, which must be obtained by registering with the respective service providers.
-- **APIs to Integrate:** Include services like OpenWeatherMap for weather data, traffic information services, and Open Charge Map for EV charging details.
+### 3. Select Your Project
+After creating your new project, ensure it's selected in the project dropdown at the top of the page.
 
-## Step 2: Data Storage
+### 4. Enable the Google Sheets API
+1. In the left sidebar or in the search bar, navigate to **APIs & Services**.
+2. Click **+ ENABLE APIS AND SERVICES** at the top of the page.
+3. In the API Library, search for **Google Sheets API**.
+4. Select the **Google Sheets API** from the search results and click **Enable**.
 
-- **Google Drive Setup:** Use Google Drive for storing the fetched data. This involves mounting Google Drive in Google Colab, which allows direct read/write operations from the notebook.
-- **Google Sheets:** Depending on the data structure returned by each API (to be initially inspected), decide whether to use a single Google Sheet with multiple tabs or multiple sheets for organizing the data effectively. This will facilitate easier data management and access, especially for geographic data like latitude and longitude which are crucial for mapping functionalities. 
+### 5. Create a Service Account
+1. Go to the **Credentials** page from the left sidebar under **APIs & Services**.
+2. Click **Create Credentials** and select **Service Account**.
+3. Enter a name for the service account (e.g., `google-sheets-service-account`).
+4. Click **Create**.
 
-## Step 3: Data Preprocessing
+### 6. Assign Role to Service Account
+1. In the **Grant this service account access to project** step, select the **Project > Owner** role to provide full access.
+2. Click **Continue**.
 
-- **Clean and Prepare Data:** Once data is stored in Google Sheets, preprocess it to ensure quality and consistency. This includes handling missing values, normalizing data, and possibly encoding categorical variables if necessary.
-- **Feature Engineering:** Derive new features that could be important for the model predictions, such as time of day from timestamp data, or aggregating traffic data into peak and non-peak hours. Incorporate geographic data transformations if necessary to enhance route predictions.
+### 7. Generate the Service Account Key
+1. After creating the service account, you’ll see it listed on the **Service Accounts** page.
+2. Click on your newly created service account.
+3. Go to the **Keys** tab.
+4. Click **Add Key** and select **Create New Key**.
+5. Choose **JSON** format for the key and click **Create**.
+6. The key file will automatically download to your computer. **Keep this file safe**, as it contains credentials that allow access to your Google Sheets data.
 
-## Step 4: Model Development and Training
+### 8. Use the JSON Key in Your Code
+Use the downloaded JSON key in your application to authenticate and access the Google Sheets API. The key will typically be used in your code like so:
 
-- **Model Selection:** Choose a suitable machine learning model based on the nature of the prediction task. For route optimization, models like decision trees, random forest, or even more complex algorithms like gradient boosting could be appropriate depending on the complexity and amount of data.
-- **Training in Colab:** Utilize Google Colab's computational resources to train the model on the preprocessed data. This will involve splitting the data into training and testing sets to validate the model’s performance.
+```python
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
-## Step 5: Evaluation and Iteration
+# Define the scope of access
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
-- **Real-Time Data Utilization:** Implement mechanisms to continuously update the route recommendations based on incoming real-time data. This involves adjusting the routes in response to changes detected in traffic patterns, weather conditions, or charging station availability.
-- **Google Maps Dynamic Rendering:** Ensure that the route updates are dynamically reflected in the Google Maps display, providing users with real-time, navigable routes. Use latitude and longitude data effectively to plot accurate and dynamic routes on the map.
+# Authenticate using the JSON key file
+credentials = ServiceAccountCredentials.from_json_keyfile_name('path/to/your/service-account-key.json', scope)
+client = gspread.authorize(credentials)
+
+# Access Google Sheets
+sheet = client.open('Your Spreadsheet Name').sheet1
+```
+
+Here are some other commands for dependencies to install after creating google sheets api.
+
+## Commands of Dependencies to Install
+
+```bash
+# Install dependencies
+pip install google-api-python-client gspread oauth2client requests
+```
+
 
