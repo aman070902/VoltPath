@@ -75,13 +75,25 @@ client = gspread.authorize(credentials)
 sheet = client.open('Your Spreadsheet Name').sheet1
 ```
 
-Here are some other commands for dependencies to install after creating google sheets api.
 
 ## Commands of Dependencies to Install
+Here are some other commands for dependencies to install after creating google sheets api.
 
 ```bash
 # Install dependencies
 pip install google-api-python-client gspread oauth2client requests
+
+# Run python script to fetch data and push to google sheets directly
+python3 backend/fetch_data.py
 ```
-
-
+## Using fetch_data.py
+1. Spreadsheet ID:
+  - When using the fetch_data.py file, change the SPREADSHEET_ID to your spreadsheet ID which can be found in the url after /d/ and before /edit.
+  - For example my google spreadsheet url is: https://docs.google.com/spreadsheets/d/1ChOWU9EpYPcyzPktd60G-6sYOO-kAGGCwtldk4YEw78/edit?gid=0#gid=0
+  - So the spreadsheet ID would be 1ChOWU9EpYPcyzPktd60G-6sYOO-kAGGCwtldk4YEw78.
+2. SERVICE_ACCOUNT_FILE
+  - make sure to change service account file to your file that you got from google console.
+3. Parameters
+  - adjust parameters to your liking for fetching requests.
+  - Here is list of Open Charge Map api documentation: https://openchargemap.org/site/develop/api#/operations/get-poi
+  - I already put my api key in for you to use, but if you want you can register your own. 
