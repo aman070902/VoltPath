@@ -97,3 +97,33 @@ python3 backend/fetch_data.py
   - adjust parameters to your liking for fetching requests.
   - Here is list of Open Charge Map api documentation: https://openchargemap.org/site/develop/api#/operations/get-poi
   - I already put my api key in for you to use, but if you want you can register your own. 
+
+
+# Accessing PostgreSQL Database on Cloud
+
+## 1. Install Required Tools
+
+You need a SQL client to connect to the database.
+
+We recommend using **DataGrip** (or any other PostgreSQL client like DBeaver, pgAdmin, or CLI `psql`).
+
+### To Install DataGrip:
+- Download here: https://www.jetbrains.com/datagrip/download/
+
+## 2. Database Connection Details
+Once you download DataGrip, create new Data Source by clicking + icon -> Data Source -> PostgreSQL.
+Then, enter the connection information below:
+
+- Host: aws-0-us-east-2.pooler.supabase.com
+- Port: 5432
+- User: postgres.xbuyvbeikmfdtemsuuzr
+- Password: (provided password)
+
+Then, click test connection to verify it works.
+
+## 3. Connecting via psql CLI
+You can also connect to the database via psql CLI:
+
+```bash
+psql postgresql://postgres.xbuyvbeikmfdtemsuuzr:[password]@aws-0-us-east-2.pooler.supabase.com:5432/postgres
+```
