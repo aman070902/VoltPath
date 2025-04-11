@@ -75,7 +75,7 @@ touch .env
 Add the following line to the file:
 
 ```env
-DATABASE_URL=postgresql://amanverma:Admin%40802301@localhost:5432/voltpath
+DATABASE_URL=xxxxxxxxxxxxxxxxx
 ```
 
 > `%40` is the URL-encoded version of `@` in the password.
