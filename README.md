@@ -96,4 +96,25 @@ python3 backend/fetch_data.py
 3. Parameters
   - adjust parameters to your liking for fetching requests.
   - Here is list of Open Charge Map api documentation: https://openchargemap.org/site/develop/api#/operations/get-poi
-  - I already put my api key in for you to use, but if you want you can register your own. 
+  - I already put my api key in for you to use, but if you want you can register your own.
+
+
+## New Changes 4/19
+1. Install Dependencies
+```bash
+# Install dependencies
+pip install requests python-dotenv psycopg2-binary kafka-python
+```
+2. Important Files to Look At
+### backend/fetch_data_test.py
+- This file is for testing fetching data with the OpenChargeMap API. You can change parameters in the params and longitude, latitude to get whatever information you want.
+- Run python3 backend/fetch_data_test.py when you want to test.
+### producer/kafka_producer_test.py
+- The producer directory includes all related files for the kafka producer which fetches data from the OpenChargeMap API, parses it and pushes to Kafka Topic
+### consumer/kafka_consumer_test.py
+- The consumer directory includes all related files for the kafka consumer which takes the incoming messages and parses it and inserts the data into the PostgreSQL database.
+### PostgreSQL DB
+- The PostgreSQL database contains 2 tables: stations and connectors
+- stations contains information about the ev charging stations like address, location, id, etc.
+- connectors contains information about the connectors for each charging station like power, connector type, etc.
+
