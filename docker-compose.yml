@@ -16,23 +16,6 @@ services:
     networks:
       - voltpath-network
 
-  # Kafka service
-  kafka:
-    image: wurstmeister/kafka:latest
-    container_name: kafka
-    environment:
-      - KAFKA_ADVERTISED_LISTENER=PLAINTEXT://kafka:9093
-      - KAFKA_LISTENER_SECURITY_PROTOCOL=PLAINTEXT
-      - KAFKA_LISTENER_INTERNAL=PLAINTEXT://kafka:9092
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
-    ports:
-      - "9092:9092"
-      - "9093:9093"
-    depends_on:
-      - zookeeper
-    networks:
-      - voltpath-network
-
   # Zookeeper service
   zookeeper:
     image: wurstmeister/zookeeper:latest
@@ -41,6 +24,24 @@ services:
       - ZOOKEEPER_CLIENT_PORT=2181
     ports:
       - "2181:2181"
+    networks:
+      - voltpath-network
+
+  # Kafka service
+  kafka:
+    image: wurstmeister/kafka:latest
+    container_name: kafka
+    environment:
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092,INTERNAL://kafka:9093
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
+      - KAFKA_INTER_BROKER_LISTENER_NAME=INTERNAL
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+    ports:
+      - "9092:9092"  # external access
+      - "9093:9093"  # internal access
+    depends_on:
+      - zookeeper
     networks:
       - voltpath-network
 

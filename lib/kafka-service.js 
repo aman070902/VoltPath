@@ -1,0 +1,24 @@
+import axios from "axios"
+
+export async function fetchNearbyStations(location) {
+  const response = await axios.post("http://127.0.0.1:8000/send_stations", null, {
+    params: {
+      latitude: location.lat,
+      longitude: location.lng,
+      distance: 10,
+    },
+  })
+
+  return response.data.stations.map((station) => ({
+    id: station.ID,
+    name: station.AddressInfo?.Title || "Unnamed",
+    location: {
+      lat: station.AddressInfo?.Latitude,
+      lng: station.AddressInfo?.Longitude,
+    },
+    distance: station.AddressInfo?.Distance || 0,
+    availableChargers: station.Connections?.length || 0,
+    totalChargers: station.NumberOfPoints || 0,
+    chargingSpeed: station.Connections?.[0]?.PowerKW || "N/A",
+  }))
+}

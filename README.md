@@ -118,3 +118,58 @@ pip install requests python-dotenv psycopg2-binary kafka-python
 - stations contains information about the ev charging stations like address, location, id, etc.
 - connectors contains information about the connectors for each charging station like power, connector type, etc.
 
+
+
+## 🔧 Project Setup Summary - by Aman
+
+**Newly Added Files:**
+- `producer/producer_fastapi.py` — FastAPI backend to fetch and send station data.
+- `lib/kafka-service.js` — Frontend helper to request data from FastAPI.
+- `lib/types.js` — Location config for default map values.
+- `components/ChargingStationMap.js` — Leaflet map UI.
+- `app/charging/page.js` — Main search page.
+
+---
+
+## 🚀 How to Run
+
+### Terminal 1: Start FastAPI Server
+```bash
+uvicorn producer.producer_fastapi:app --reload
+```
+
+### Terminal 2: Start Frontend (Next.js)
+```bash
+npm run dev
+```
+
+Visit: [http://localhost:3001/charging](http://localhost:3001/charging)
+
+---
+
+## ⚠️ Common Issues
+
+### ❌ Import Errors
+Update the following lines in `page.js` **relative to your project**:
+```js
+import { fetchNearbyStations } from "../../lib/kafka-service"
+import { defaultLocation } from "../../lib/types"
+```
+Avoid absolute paths like `/Users/...`.
+
+---
+
+## 📦 Dependencies
+
+### Python:
+```bash
+pip install fastapi uvicorn kafka-python python-dotenv requests
+```
+
+### Node:
+```bash
+npm install
+```
+
+Includes: `axios`, `react-leaflet`, `leaflet`, `next`, `react`, `react-dom`
+
