@@ -43,3 +43,6 @@ next-env.d.ts
 # Ignore Google Cloud service keys
 config/*.json
 config/voltpath-36675ee707c3.json
+
+#Virtual Environment
+venv/
