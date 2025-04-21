@@ -42,6 +42,11 @@ jobs:
       - name: 🧪 Backend Lint Check (Optional)
         run: |
           python -m py_compile producer/producer_fastapi.py
+      
+      - name: 🧪 Consumer Lint Check (Optional)
+        run: |
+          python -m py_compile consumer/consumer_fastapi.py
+
 
       - name: 🟦 Set up Node.js
         uses: actions/setup-node@v3
