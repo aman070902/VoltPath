@@ -120,56 +120,26 @@ pip install requests python-dotenv psycopg2-binary kafka-python
 
 
 
-## 🔧 Project Setup Summary - by Aman
+## ✅ VoltPath Setup Guide (by Aman)
 
-**Newly Added Files:**
-- `producer/producer_fastapi.py` — FastAPI backend to fetch and send station data.
-- `lib/kafka-service.js` — Frontend helper to request data from FastAPI.
-- `lib/types.js` — Location config for default map values.
-- `components/ChargingStationMap.js` — Leaflet map UI.
-- `app/charging/page.js` — Main search page.
+### 🐳 Step 1: Start Kafka & Zookeeper
+```bash
+docker-compose up -d
+```
 
----
-
-## 🚀 How to Run
-
-### Terminal 1: Start FastAPI Server
+### 🖥️ Step 2: Start Backend (Terminal 1)
 ```bash
 uvicorn producer.producer_fastapi:app --reload
 ```
 
-### Terminal 2: Start Frontend (Next.js)
+> (Optional) You can test using:
+```bash
+curl -X POST "http://127.0.0.1:8000/send_stations/?latitude=40.7306&longitude=-73.9352"
+```
+
+### 💻 Step 3: Start Frontend (Terminal 2)
 ```bash
 npm run dev
 ```
 
-Visit: [http://localhost:3001/charging](http://localhost:3001/charging)
-
----
-
-## ⚠️ Common Issues
-
-### ❌ Import Errors
-Update the following lines in `page.js` **relative to your project**:
-```js
-import { fetchNearbyStations } from "../../lib/kafka-service"
-import { defaultLocation } from "../../lib/types"
-```
-Avoid absolute paths like `/Users/...`.
-
----
-
-## 📦 Dependencies
-
-### Python:
-```bash
-pip install fastapi uvicorn kafka-python python-dotenv requests
-```
-
-### Node:
-```bash
-npm install
-```
-
-Includes: `axios`, `react-leaflet`, `leaflet`, `next`, `react`, `react-dom`
-
+Visit: [http://localhost:3000/charging](http://localhost:3000/charging)
