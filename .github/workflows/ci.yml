@@ -49,12 +49,8 @@ jobs:
           node-version: '18'
 
       - name: 📦 Install Frontend Dependencies
-        run: |
-          cd voltpath-new
-          npm install
+        run: npm install
 
       - name: 🧪 Build Frontend
-        run: |
-          cd voltpath-new
-          npm run build
+        run: npm run build
 
