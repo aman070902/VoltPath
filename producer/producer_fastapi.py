@@ -102,7 +102,7 @@ def load_env_variables():
     return api_key
 
 # Create Kafka producer
-def create_producer(bootstrap_servers='localhost:9092'):
+def create_producer(bootstrap_servers='kafka:9092'):
     try:
         producer = KafkaProducer(
             bootstrap_servers=bootstrap_servers,

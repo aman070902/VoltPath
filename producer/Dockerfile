@@ -1,16 +1,18 @@
-# Use a Python base image
+# Base image
 FROM python:3.11-slim
 
-# Set working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy the requirements file and install dependencies
-COPY producer/requirements.txt /app/requirements.txt
-RUN pip install --upgrade pip && pip install -r requirements.txt
+# Install Python dependencies
+COPY producer/requirements.txt .
+RUN pip install --upgrade pip && pip install -r requirements.txt && pip install fastapi uvicorn
 
-# Copy the producer script and environment file into the container
-COPY producer/kafka_producer_test.py /app/kafka_producer_test.py
+# Copy the FastAPI producer script
+COPY producer/producer_fastapi.py .
 
-# Set the default command to run the producer
-CMD ["python3", "kafka_producer_test.py"]
+# Expose the port FastAPI runs on
+EXPOSE 8000
 
+# Run the FastAPI app using uvicorn
+CMD ["uvicorn", "producer_fastapi:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

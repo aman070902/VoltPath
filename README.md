@@ -132,12 +132,18 @@ docker-compose up -d
 uvicorn producer.producer_fastapi:app --reload
 ```
 
+
+### 🖥️ Step 3: Start Consumer (Terminal 2)
+```bash
+uvicorn consumer.consumer_fastapi:app --reload --port 8001
+```
+
 > (Optional) You can test using:
 ```bash
 curl -X POST "http://127.0.0.1:8000/send_stations/?latitude=40.7306&longitude=-73.9352"
 ```
 
-### 💻 Step 3: Start Frontend (Terminal 2)
+### 💻 Step 4: Start Frontend (Terminal 3)
 ```bash
 npm run dev
 ```

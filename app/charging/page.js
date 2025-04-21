@@ -1,3 +1,4 @@
+//page.js
 "use client"
 
 import dynamic from "next/dynamic"
@@ -6,7 +7,9 @@ import { fetchNearbyStations } from '@/lib/kafka-service'
 import { defaultLocation } from '@/lib/types'
 
 // Dynamically import the map to avoid SSR crash
-const ChargingStationMap = dynamic(() => import("../../components/ChargingStationMap"), {
+// const ChargingStationMap = dynamic(() => import("../../components/ChargingStationMap"), {
+
+const ChargingStationMap = dynamic(() => import("./ChargingStationMap"), {
   ssr: false,
 })
 

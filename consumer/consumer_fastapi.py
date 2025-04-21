@@ -24,7 +24,7 @@ def load_env_variables():
         'DB_PASSWORD': db_password
     }
 
-def create_consumer(topic, bootstrap_servers='localhost:9092'):
+def create_consumer(topic, bootstrap_servers='kafka:9092'):
     return KafkaConsumer(
         topic,
         bootstrap_servers=bootstrap_servers,

@@ -1,15 +1,15 @@
-# Use a Python base image
+# Base image
 FROM python:3.11-slim
 
-# Set working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy the requirements file and install dependencies
-COPY consumer/requirements.txt /app/requirements.txt
-RUN pip install --upgrade pip && pip install -r requirements.txt
+# Install dependencies
+COPY consumer/requirements.txt .
+RUN pip install --upgrade pip && pip install -r requirements.txt && pip install uvicorn fastapi
 
-# Copy the consumer script and environment file into the container
-COPY consumer/kafka_consumer_test.py /app/kafka_consumer_test.py
+# Copy consumer code
+COPY consumer/consumer_fastapi.py .
 
-# Set the default command to run the consumer
-CMD ["python3", "kafka_consumer_test.py"]
+# Run FastAPI server
+CMD ["uvicorn", "consumer_fastapi:app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
