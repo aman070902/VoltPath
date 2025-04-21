@@ -2,8 +2,8 @@
 
 import dynamic from "next/dynamic"
 import { useState } from "react"
-import { fetchNearbyStations } from "/Users/amanverma/Documents/VoltPath/voltpath-new/lib/kafka-service.js "
-import { defaultLocation } from "/Users/amanverma/Documents/VoltPath/voltpath-new/lib/types.js "
+import { fetchNearbyStations } from '@/lib/kafka-service'
+import { defaultLocation } from '@/lib/types'
 
 // Dynamically import the map to avoid SSR crash
 const ChargingStationMap = dynamic(() => import("../../components/ChargingStationMap"), {

@@ -147,21 +147,25 @@ def send_stations_to_kafka(producer, topic, stations):
 # FastAPI route
 @app.post("/send_stations/")
 async def send_stations(
-    latitude: float = Query(..., description="Latitude of user's location"),
-    longitude: float = Query(..., description="Longitude of user's location"),
-    distance: int = Query(10, description="Search radius in km")
+    latitude: float = Query(...),
+    longitude: float = Query(...),
+    distance: int = Query(10)
 ):
     try:
+        print(f"📍 Received: lat={latitude}, lng={longitude}, distance={distance}")
         api_key = load_env_variables()
+        print(f"✅ Loaded API key: {api_key}")
         producer = create_producer()
+        print(f"🚀 Kafka producer created")
         stations = fetch_stations(api_key, latitude, longitude, distance)
+        print(f"📦 Fetched {len(stations)} stations")
         send_stations_to_kafka(producer, topic='chargingstationdata', stations=stations)
         return {
             "message": "Stations sent to Kafka successfully!",
             "station_count": len(stations),
             "stations": stations
         }
-    except HTTPException as e:
-        raise e
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+        print(f"❌ ERROR: {e}")
+        raise HTTPException(status_code=500, detail=f"Server Error: {str(e)}")
+

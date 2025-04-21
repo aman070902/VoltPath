@@ -8,11 +8,17 @@ def load_env_variables():
     load_dotenv()
     return os.getenv('API_KEY')
 
-def create_producer(bootstrap_servers='localhost:9092'):
-    return KafkaProducer(
-        bootstrap_servers=bootstrap_servers,
-        value_serializer=lambda v: json.dumps(v).encode('utf-8')
-    )
+def create_producer():
+    bootstrap_servers = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
+    try:
+        producer = KafkaProducer(
+            bootstrap_servers=bootstrap_servers,
+            value_serializer=lambda v: json.dumps(v).encode("utf-8")
+        )
+        return producer
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Kafka connection failed: {str(e)}")
+
 
 def fetch_stations(api_key, latitude=40.7209, longitude=-74.0007, distance=10):
     API_URL = 'https://api.openchargemap.io/v3/poi/'
