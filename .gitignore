@@ -46,4 +46,5 @@ config/voltpath-36675ee707c3.json
 
 #Virtual Environment
 venv/
-voltpath/
+voltpath/__pycache__/
+*.pyc
