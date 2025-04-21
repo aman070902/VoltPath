@@ -10,7 +10,7 @@ app = FastAPI()
 def load_env_variables():
     load_dotenv()
 
-    db_host = os.getenv('DB_HOST', 'localhost')
+    db_host = os.getenv('DB_HOST', 'postgres-1.cvyc2yuysj0z.us-east-2.rds.amazonaws.com')
     db_port = os.getenv('DB_PORT', '5432')  # Adjust if needed
     db_name = os.getenv('DB_NAME', 'voltpathdb')
     db_user = os.getenv('DB_USER', 'postgres')
